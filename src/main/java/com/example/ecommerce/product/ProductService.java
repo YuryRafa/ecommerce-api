@@ -1,4 +1,4 @@
-package product;
+package com.example.ecommerce.product;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class ProductService {
 
     }
 
-    public List<Product> list(){
+    public List<Product> findAll(){
         return productRepository.findAll();
 
     }
@@ -26,7 +26,7 @@ public class ProductService {
     public Product findById(String id) {
         UUID uuid = UUID.fromString(id);
         return productRepository.findById(uuid)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     public void delete(String id) {
